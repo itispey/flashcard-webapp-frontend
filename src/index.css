@@ -1,0 +1,124 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Design approach: Telegram Mini Apps live inside another app's chrome, not
+  their own. Users expect the app to match whatever theme (light/dark,
+  accent color) they already have set in Telegram — not a fixed brand
+  palette. So instead of hardcoding colors, we bind Shadcn's token system
+  to Telegram's --tg-theme-* CSS variables (set at runtime by TelegramProvider
+  in src/telegram/theme.ts) and fall back to a neutral, native-feeling
+  palette when running outside Telegram (e.g. plain browser dev mode).
+*/
+
+:root {
+  --radius: 0.75rem;
+
+  /* Fallback palette (used outside Telegram, e.g. `npm run dev` in a browser) */
+  --tg-bg: #ffffff;
+  --tg-text: #0f0f0f;
+  --tg-hint: #707579;
+  --tg-link: #3390ec;
+  --tg-button: #3390ec;
+  --tg-button-text: #ffffff;
+  --tg-secondary-bg: #f4f4f5;
+  --tg-section-bg: #ffffff;
+  --tg-section-separator: #e4e4e7;
+  --tg-destructive: #df3f40;
+
+  --background: var(--tg-bg);
+  --foreground: var(--tg-text);
+  --card: var(--tg-section-bg);
+  --card-foreground: var(--tg-text);
+  --popover: var(--tg-section-bg);
+  --popover-foreground: var(--tg-text);
+  --primary: var(--tg-button);
+  --primary-foreground: var(--tg-button-text);
+  --secondary: var(--tg-secondary-bg);
+  --secondary-foreground: var(--tg-text);
+  --muted: var(--tg-secondary-bg);
+  --muted-foreground: var(--tg-hint);
+  --accent: var(--tg-secondary-bg);
+  --accent-foreground: var(--tg-text);
+  --destructive: var(--tg-destructive);
+  --destructive-foreground: #ffffff;
+  --border: var(--tg-section-separator);
+  --input: var(--tg-section-separator);
+  --ring: var(--tg-button);
+
+  /* Telegram-specific safe-area + chrome measurements, set at runtime */
+  --tg-viewport-height: 100vh;
+  --tg-viewport-stable-height: 100vh;
+  --tg-safe-area-inset-top: 0px;
+  --tg-safe-area-inset-bottom: 0px;
+}
+
+.dark {
+  --tg-bg: #17212b;
+  --tg-text: #f5f5f5;
+  --tg-hint: #7d8b99;
+  --tg-link: #6ab3f3;
+  --tg-button: #5288c1;
+  --tg-button-text: #ffffff;
+  --tg-secondary-bg: #232e3c;
+  --tg-section-bg: #1c2733;
+  --tg-section-separator: #0e1621;
+  --tg-destructive: #ec6d6d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    /* Use Telegram's real viewport height so content isn't hidden behind
+       Telegram's own header/nav chrome. Set dynamically in theme.ts. */
+    height: var(--tg-viewport-stable-height);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    height: 100%;
+    overscroll-behavior-y: none; /* stop pull-to-refresh fighting Telegram's own gesture */
+    -webkit-tap-highlight-color: transparent;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
