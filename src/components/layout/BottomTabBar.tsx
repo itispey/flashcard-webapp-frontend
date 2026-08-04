@@ -1,10 +1,11 @@
-import { Home, User } from "lucide-react"
+import { BookOpenText, User, Search } from "lucide-react"
 import { NavLink } from "react-router-dom"
 
 import { cn } from "@/lib/utils"
 
 const TABS = [
-  { to: "/", label: "Home", icon: Home, end: true },
+  { to: "/", label: "Library", icon: BookOpenText, end: true },
+  { to: "/explore", label: "Explore", icon: Search, end: false },
   { to: "/profile", label: "Profile", icon: User, end: false },
 ]
 
