@@ -42,6 +42,17 @@ telegram-mini-app/
 └── docker-compose.yml         # Local Postgres
 ```
 
+## Docker
+
+The full stack is orchestrated from the backend repo. With this repo checked out as `../frontend` relative to `backend/`:
+
+```bash
+cd ../backend
+docker compose up --build
+```
+
+The Vite dev server will be at http://localhost:3002. See `backend/README.md` for production and Postgres-only options.
+
 ## 1. Run Postgres
 
 ```bash
