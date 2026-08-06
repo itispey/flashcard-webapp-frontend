@@ -2,7 +2,7 @@ import { useLaunchParams } from "@tma.js/sdk-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useCurrentUser } from "@/hooks/use-current-user"
+import { useCurrentUser } from "@/features/auth/hooks/use-current-user"
 
 export function ProfilePage() {
   const { data: user, isLoading, isError } = useCurrentUser()
