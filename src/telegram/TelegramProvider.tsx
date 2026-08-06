@@ -1,4 +1,4 @@
-import { init, themeParams, viewport, miniApp } from "@tma.js/sdk"
+import { init, themeParams, viewport, miniApp, isTMA } from "@tma.js/sdk"
 import { type ReactNode, useEffect, useState } from "react"
 
 import { bindTelegramViewportVars } from "@/telegram/theme"
@@ -9,7 +9,7 @@ import { bindTelegramViewportVars } from "@/telegram/theme"
  * Useful for guarding calls to Telegram-only APIs.
  */
 export function isRunningInTelegram() {
-  return typeof window !== "undefined" && Boolean(window.Telegram?.WebApp)
+  return isTMA()
 }
 
 /**
