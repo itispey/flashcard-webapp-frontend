@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 
-import { BottomTabBar } from "@/components/layout/BottomTabBar"
+import { BottomTabBar } from "@/layout/BottomTabBar"
 
 export function AppLayout() {
   return (

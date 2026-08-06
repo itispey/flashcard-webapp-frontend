@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { useCategories } from "@/hooks/use-categories"
+import { useCategories } from "@/features/categories/hooks/use-categories"
 import { cn } from "@/lib/utils"
 
 export function HomePage() {

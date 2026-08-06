@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom"
 
-import { AppLayout } from "@/components/layout/AppLayout"
-import { CreateCategoryPage } from "@/pages/CreateCategoryPage"
-import { HomePage } from "@/pages/HomePage"
-import { ProfilePage } from "@/pages/ProfilePage"
+import { CreateCategoryPage } from "@/features/categories/CreateCategoryPage"
+import { HomePage } from "@/features/home/HomePage"
+import { ProfilePage } from "@/features/profile/ProfilePage"
+import { AppLayout } from "@/layout/AppLayout"
 
 export const router = createBrowserRouter([
   {
