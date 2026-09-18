@@ -1,18 +1,22 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-
-function Card({ className, ...props }: React.ComponentProps<"div">) {
+import { cn } from "@/lib/utils";
+interface CardProps extends React.ComponentProps<"div"> {
+  interactive?: boolean;
+}
+function Card({ className, interactive, ...props }: CardProps) {
   return (
     <div
       data-slot="card"
       className={cn(
         "bg-card text-card-foreground rounded-2xl border border-border/60 shadow-sm",
-        className
+        interactive &&
+          "transition-colors hover:bg-accent active:bg-accent/80 cursor-pointer",
+        className,
       )}
       {...props}
     />
-  )
+  );
 }
 
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
@@ -22,7 +26,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("flex flex-col gap-1 px-4 pt-4", className)}
       {...props}
     />
-  )
+  );
 }
 
 function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
@@ -32,7 +36,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("text-base font-semibold leading-none", className)}
       {...props}
     />
-  )
+  );
 }
 
 function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
@@ -42,13 +46,17 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
-  )
+  );
 }
 
 function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div data-slot="card-content" className={cn("px-4 py-4", className)} {...props} />
-  )
+    <div
+      data-slot="card-content"
+      className={cn("px-4 py-4", className)}
+      {...props}
+    />
+  );
 }
 
 function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
@@ -58,7 +66,14 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("flex items-center px-4 pb-4", className)}
       {...props}
     />
-  )
+  );
 }
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+};

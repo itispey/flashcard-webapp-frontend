@@ -8,8 +8,11 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import { useCreateCategory } from "@/features/categories/hooks/use-categories"
+import { useBackButton } from "@/telegram/hooks/use-back-button"
 
 export function CreateCategoryPage() {
+  useBackButton()
+  
   const navigate = useNavigate()
   const createCategory = useCreateCategory()
 
@@ -17,7 +20,7 @@ export function CreateCategoryPage() {
   const [description, setDescription] = useState("")
   const [isPublic, setIsPublic] = useState(false)
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault()
 
     const trimmedName = name.trim()
@@ -57,7 +60,6 @@ export function CreateCategoryPage() {
             maxLength={64}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            autoFocus
           />
         </div>
 
