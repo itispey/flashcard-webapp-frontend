@@ -6,10 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Skeleton } from "@/components/ui/skeleton"
 import { useCategories } from "@/features/categories/hooks/use-categories"
 import { cn } from "@/lib/utils"
-import { useBackButton } from "@/telegram/hooks/use-back-button"
 
 export function HomePage() {
-  useBackButton()
   const { data: categories, isLoading, isError } = useCategories()
 
   return (
@@ -46,7 +44,8 @@ export function HomePage() {
       {!isLoading && categories && categories.length > 0 && (
         <div className="flex flex-col gap-3">
           {categories.map((category) => (
-            <Card interactive key={category.id}>
+            <Link to={`/categories/${category.id}`} key={category.id}>
+              <Card interactive>
               <CardHeader className="pb-2">
                 <div className="flex items-start justify-between gap-3">
                   <CardTitle>{category.name}</CardTitle>
@@ -80,7 +79,8 @@ export function HomePage() {
                   Created {new Date(category.created_at).toLocaleDateString()}
                 </p>
               </CardContent>
-            </Card>
+              </Card>
+            </Link>
           ))}
         </div>
       )}

@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useCreateCategory } from "@/features/categories/hooks/use-categories"
 import { useBackButton } from "@/telegram/hooks/use-back-button"
 
-export function CreateCategoryPage() {
+export function CategoryCreatePage() {
   useBackButton()
   
   const navigate = useNavigate()
